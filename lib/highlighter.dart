@@ -56,11 +56,17 @@ class Highlighter {
   }
 
   List<InlineSpan> run(String text, int line, Document document) {
+    // The default Style
     TextStyle defaultStyle = TextStyle(
         fontFamily: 'FiraCode', fontSize: fontSize, color: foreground);
+
+    // This is what gets returned here.
     List<InlineSpan> res = <InlineSpan>[];
+
+    // Decoration stuff?
     List<LineDecoration> decors = <LineDecoration>[];
 
+    // Go through Color map and color everything.
     for (var exp in colorMap.keys) {
       RegExp regExp = RegExp(exp, caseSensitive: false, multiLine: false);
       var matches = regExp.allMatches(text);
