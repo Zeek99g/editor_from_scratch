@@ -81,10 +81,16 @@ class Highlighter {
     }
 
     text += ' ';
+
     String prevText = '';
+
+    // Move through the text.
     for (int i = 0; i < text.length; i++) {
+
       String ch = text[i];
+
       TextStyle style = defaultStyle.copyWith();
+
       Cursor cur = document.cursor.normalized();
 
       // decorate
@@ -120,26 +126,43 @@ class Highlighter {
       }
 
       if (res.isNotEmpty && res[res.length - 1] is! WidgetSpan) {
+
         TextSpan prev = res[res.length - 1] as TextSpan;
+
         if (prev.style == style) {
+
           prevText += ch;
+
           res[res.length - 1] = TextSpan(
               text: prevText,
               style: style,
               mouseCursor: MaterialStateMouseCursor.textable);
+
           continue;
         }
       }
 
-      res.add(TextSpan(
+      res.add(
+        TextSpan(
           text: ch,
           style: style,
-          mouseCursor: MaterialStateMouseCursor.textable));
+          mouseCursor: MaterialStateMouseCursor.textable
+        )
+      );
+
       prevText = ch;
     }
 
-    res.add(CustomWidgetSpan(
-        child: const SizedBox(height: 1, width: 8), line: line));
+    res.add(
+      CustomWidgetSpan(
+        child: const SizedBox(
+          height: 1,
+          width: 8
+        ),
+        line: line,
+      ),
+    );
+    
     return res;
   }
 }
