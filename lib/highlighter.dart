@@ -162,7 +162,7 @@ class Highlighter {
         line: line,
       ),
     );
-    
+
     return res;
   }
 }
